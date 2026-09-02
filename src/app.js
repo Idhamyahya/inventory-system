@@ -1,5 +1,6 @@
 import express from "express";
 import pool from "./config/database.js";
+import { router } from "./routes/categoryRoute.js";
 
 const app = express();
 
@@ -26,5 +27,7 @@ app.get("/health/database", async (req, res) => {
     });
   }
 });
+
+app.use("/api/categories", router);
 
 export default app;

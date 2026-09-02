@@ -1,14 +1,12 @@
 import pool from "../config/database.js";
 
-export const createCategory = async (name, description) => {
-  const [result] = await pool.execute(
+export const getAllCategories = async () => {
+  const [rows] = await pool.query(
     `
-    INSERT INTO categories (name,description)
-    VALUES (?,?),
-    
+    SELECT id,name,created_at,updated_at
+    FROM categories
+    ORDER BY id ASC
     `,
-    [name, description],
   );
-
-  return result;
+  return rows;
 };
