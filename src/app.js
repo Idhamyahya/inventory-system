@@ -1,4 +1,5 @@
 import express from "express";
+import pool from "./config/database.js";
 
 const app = express();
 
@@ -9,6 +10,21 @@ app.get("/health", (req, res) => {
     success: true,
     message: "Server is healthy",
   });
+});
+
+app.get("/health/database", async (req, res) => {
+  try {
+    await pool.query("SELECT 1 AS result");
+    res.status(200).json({
+      success: true,
+      message: "Database connected",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Database not connected",
+    });
+  }
 });
 
 export default app;
