@@ -28,6 +28,6 @@ app.get("/health/database", async (req, res) => {
   }
 });
 
-app.use("/api/categories", router);
+app.use("/", router);
 
 export default app;
